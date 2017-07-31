@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>FileManager</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
+</head>
+<body>
+
+<script type="text/javascript" src="app.bundle.js?72b14283b2208a7c57aa"></script></body>
+<script>
+	$(document).ready(function(){
+		window.ahmedAPI.setUrl('https://route.cit.api.here.com/routing/7.2/calculateroute.json?waypoint0=53.5533%2C10.0017&waypoint1=48.1424%2C11.5547&mode=fastest%3Bcar%3Btraffic%3Adisabled&routeattributes=no%2Csh%2Cwp&maneuverattributes=di%2Csh%2Csq%2Cti%2Ctm%2Ctt%2Cwt&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&departure=now');
+		window.ahmedAPI.getJSON("response/route/0/shape");
+	});
+</script>
+</html>
