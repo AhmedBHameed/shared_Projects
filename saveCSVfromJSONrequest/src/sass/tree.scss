@@ -1,0 +1,315 @@
+
+$navBarColor :#2196F3;
+$asideFolderColor: #7A7A7A;
+$disabledMenuOption : #cacaca;
+$selectionColor: #DC143C;
+
+@import './_options';
+@import './_mixins';
+
+body{
+  position: relative;
+  // background: url('./../assets/gs.jpg');
+  @include font-source-sans();
+  .navbar{
+    width: 100%;
+    height: 50px;
+    background: #2196F3;
+    line-height: 49px;
+    margin: 0px;
+    border-radius: 0px;
+    color: white;
+    font-weight: bold;
+    overflow: hidden;
+    .bc{
+      .name{
+        position: relative;
+        display: inline-block;
+        padding-right: 10px;
+        &:after{
+          @include pseudo;
+          @include css-triangle(
+            #fff,
+            $direction: right,
+            $size: 7px,
+            $position: absolute,
+            $round: false,
+            $centralize: true);
+        }
+      }
+      .path{
+        @include truncate(50%);
+        padding-left: 10px;
+        font-style: italic;
+        display: inline-block;
+      }
+    }
+    input[type="text"]{
+      @include input-placeholder{
+        color: lightness($navBarColor);
+      }
+    }
+  }
+
+  .aside{
+    background: #FAFAFA;
+    border-right: 1px solid #F5F5F5;
+    color: #7A7A7A;
+    .tree{
+      ul{
+        overflow: auto;
+        min-width: 150px;
+        list-style: none;
+        padding-left: 8px;
+        &:not(:first-child){
+            display: none;
+        }
+      }
+      ul.collapsibleList{
+        overflow: auto;
+        position: relative;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #EEE;
+        li{
+          margin-top: 10px;
+          display: block;
+          span.folder{
+            cursor: pointer;
+            font-weight: bold;
+            &:hover{
+              .showup, .arrow, .foldershape, .caption{
+                color: lighten($asideFolderColor, 20%);
+              }
+            }
+          }
+          .fa-spinner{
+            opacity: 0;
+            margin-left: 10px;
+            transition: opacity 1s ease-out;
+            pointer-events: none;
+          }
+          .showup{ 
+            opacity: 1;
+            transition: opacity 0s ease-out;
+          }
+          .arrow{
+            padding-right: 8px;
+            font-weight: bolder;
+            font-size: 16px;
+            width: 20px;
+            display: inline-block;
+            margin: 0 auto;
+          }
+          .foldershape{
+            padding-right: 3px;
+            width: 16px;
+          }
+        }
+      }
+    }
+    .uploadfiled{
+      border: 2px dotted #BBB;
+      position: relative;
+      h4{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)
+      }
+      input{
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        z-index: 99;
+        height: 100%;
+      }
+      .progress{
+        position: absolute;
+        display: none;
+        z-index: 99;
+        bottom: 0%;
+        width: 100%;
+        margin-bottom: 0px;
+        // transform: translate(0% , -50%);
+      }
+    }
+  }
+  .explorer{
+    position: relative;
+    .popover{
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      left: initial;
+      bottom: initial;
+      .popover-title > span{
+        font-size: 18px;
+        line-height: 18px;
+        cursor: pointer;
+      }
+      .popover-content{
+        float: left;
+        & > input{
+          width: 80%;
+          font-weight: bold;
+          &::selection {
+            background: $selectionColor; /* WebKit/Blink Browsers */
+            color: white;
+          }
+          &::-moz-selection {
+            background: $selectionColor; /* Gecko Browsers */
+            color: white;
+          }
+        }
+        & > span {
+          width: 20%;
+          padding: 4px;
+          color: white;
+          font-weight: bold;
+          background: $navBarColor;
+          cursor: pointer;
+        }
+      }
+    }
+    ul.liststyle{
+      padding: 0px;
+      margin: 0px;
+      list-style: none;
+      overflow: auto;      
+      li{
+        width: 100px;
+        height: 80px;
+        margin: 5px;
+        margin-top: 10px;
+        color: white;
+        cursor: pointer;
+        border: 2px solid #E0E0E0;
+        border-radius: 3px;
+        float: left;
+        padding: 1px;
+        .contentContainer{
+          position: relative;
+          width: 100%;
+          height: 100%;
+          img{
+            position: absolute;
+            height: 70%;
+            width: 100%;
+          }
+          i{
+            position: absolute;
+            height: 70%;
+            width: 100%;
+            font-size: 55px;
+            display: inline-block;
+            color: #2196F3;
+            text-align: center;
+          }
+          .caption{
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: 30%;
+            span{
+              word-wrap: break-word;
+              display: block;
+              height: 100%;
+              background: #333;
+              padding-left: 5px;
+              color: #FDFDFD;
+              overflow: hidden;
+            }
+          }
+          input[type="checkbox"]{
+              display: none;
+            }
+          .checkbox{
+            position: absolute;
+            right: 2px;
+            bottom: 2px;
+            opacity: 0;
+            cursor: pointer;
+            font-family: FontAwesome;
+            width: 17px;
+            height: 17px;
+            margin: 0px;
+            background: #333;
+            border: 1px solid white;
+            font-size: 14px;
+            line-height: 16px;
+            padding-left: 1px;
+          }
+        }
+
+        &:hover{
+          border: 2px solid $selectionColor;
+          .checkbox{
+            opacity: 1;
+          }
+        }
+      }
+      li.active{
+        border: 2px solid $selectionColor;
+        .checked{
+          opacity: 1;
+        }
+      }
+    }
+    .loadmore{
+      position: absolute;
+      bottom: 10px;
+      right: 30px;
+      display: none;
+      i{
+        position: relative;
+        color: $navBarColor;
+        text-align: center;
+        display: block;
+      }
+      span{
+        display: block;
+        font-weight: bolder;
+        color: $asideFolderColor;
+        font-size: 12px; 
+      }
+    }
+  }
+  .rcmenu, .rcmenuonfilelist{
+    position: absolute;
+    z-index: 99999;
+    width: 200px;
+    background: #EEE;
+    list-style: none;
+    padding: 2px;
+    border-radius: 2px;
+    color: $asideFolderColor;
+    font-weight: bolder;
+    margin: 0px;
+    display: none;
+    li{
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 2px solid #e5e3e3;
+      transition: all .1s ease-in;
+      margin-bottom: 2px;
+      &:hover{
+        cursor: pointer;
+        border: 1px solid $navBarColor;
+        color: $navBarColor;
+      }
+    }
+    li.disable{
+      pointer-events: none;
+      color: $disabledMenuOption;
+    }
+  }
+  .videoform{
+    display: none;
+  }
+  .tooltip{
+    overflow: hidden;
+  }
+}
+
+@import './../fancybox-3.0/dist/jquery.fancybox.min.css';
